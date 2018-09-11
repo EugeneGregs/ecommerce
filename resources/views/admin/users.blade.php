@@ -8,7 +8,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Type</th>
-      <th colspan="3">Actions</th>
+      <th>Actions</th>
     </tr>
     @foreach($users as $user)
     <tr>
@@ -16,9 +16,13 @@
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->user_type->user_type }}</td>
-      <td><button class="btn btn-sm btn-primary">View</button></td>
-      <td><button class="btn btn-sm btn-warning">Block</button></td>
-      <td><button class="btn btn-sm btn-danger">Delete</button></td>
+      <td>
+        <form method="POST" action="/users/{{ $user->id }}" onsubmit="return confirm('Are you sure you want to delete {{ $user->name }}')">
+                  {{ csrf_field() }}
+                  {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+      </td>
     </tr>
     @endforeach
   </table>

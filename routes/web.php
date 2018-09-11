@@ -30,6 +30,7 @@ Route::get('/categories/{id}','CategoryController@show');
 Route::patch('/categories/{id}','CategoryController@update');
 Route::delete('/categories/{id}','CategoryController@destroy');
 
+Route::delete('/users/{id}','UserController@destroy');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

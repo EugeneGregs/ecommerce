@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User_type;
 
+use App\User;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -91,7 +93,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id',$id)
+        ->delete();
+        return redirect('/users');
     }
 
     public function getUsers(){
