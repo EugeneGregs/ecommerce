@@ -37,6 +37,9 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    // public function user_type(){
+    //     return $this->belongsTo(User_type::class);
+    // }
     public function user_type(){
         return $this->belongsTo(User_type::class);
     }

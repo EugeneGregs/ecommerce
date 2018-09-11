@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use App\User_type;
+
 class CreateUserTypesTable extends Migration
 {
     /**
@@ -15,9 +17,19 @@ class CreateUserTypesTable extends Migration
     {
         Schema::create('user_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_type');
+            $table->string('user_type');
             $table->timestamps();
         });
+
+        //insert default values
+       DB::table('user_types')->insert(
+           array(
+               array('user_type' => 'Admin'),
+               array('user_type' => 'Buyer'),
+               array('user_type' => 'Seller')
+           )
+       );
+
     }
 
     /**

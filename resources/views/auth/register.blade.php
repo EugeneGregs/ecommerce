@@ -16,9 +16,9 @@
                             <div class="col-md-6">
                                 <select class="form-control" name="user_type">
                                     <option value="">--Select User Type--</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Customer</option>
-                                    <option value="3">Seller</option>
+                                    @foreach($userTypes as $userType)
+                                    <option value="{{ $userType->id }}">{{ $userType->user_type }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

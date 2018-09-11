@@ -16,7 +16,20 @@
 // });
 
 //admin roots
-Route::get('/','UserController@admin');
+Route::get('/','UserController@index');
+Route::get('/users','UserController@getUsers');
 Auth::routes();
+
+
+//category roots
+Route::get('/categories','CategoryController@index');
+Route::get('/categories/create','CategoryController@create');
+Route::post('/categories','CategoryController@store');
+Route::get('/categories/edit/{id}','CategoryController@edit');
+Route::get('/categories/{id}','CategoryController@show');
+Route::patch('/categories/{id}','CategoryController@update');
+Route::delete('/categories/{id}','CategoryController@destroy');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
