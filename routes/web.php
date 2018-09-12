@@ -11,15 +11,17 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//admin roots
-Route::get('/','UserController@index');
-Route::get('/users','UserController@getUsers');
+//User roots
+Route::get('/users','UserController@index');
+Route::get('/users/{id}','UserController@show');
+Route::delete('/users/{id}','UserController@destroy');
+
+//auth routes
 Auth::routes();
-
 
 //category roots
 Route::get('/categories','CategoryController@index');
@@ -30,7 +32,29 @@ Route::get('/categories/{id}','CategoryController@show');
 Route::patch('/categories/{id}','CategoryController@update');
 Route::delete('/categories/{id}','CategoryController@destroy');
 
-Route::delete('/users/{id}','UserController@destroy');
-
-
+//home root
 Route::get('/home', 'HomeController@index')->name('home');
+
+//feature routes
+Route::get('/features','FeatureController@index');
+Route::get('/features/create','FeatureController@create');
+Route::post('/features','FeatureController@store');
+Route::get('/features/edit/{id}','FeatureController@edit');
+Route::get('/features/{id}','FeatureController@show');
+Route::patch('/features/{id}','FeatureController@update');
+Route::delete('/features/{id}','FeatureController@destroy');
+
+//products routes
+Route::get('/products','ProductController@index');
+Route::get('/products/create','ProductController@create');
+Route::post('/products','ProductController@store');
+Route::get('/products/edit/{id}','ProductController@edit');
+Route::get('/products/{id}','ProductController@show');
+Route::patch('/products/{id}','ProductController@update');
+Route::delete('/products/{id}','ProductController@destroy');
+
+//product-feature routes
+Route::get('/product_features/{product_id}','Product_featureController@index');
+Route::get('/product_features/create/{product_id}/{feature_id}','Product_featureController@create');
+Route::delete('/product_features/{product_id}/{feature_id}','Product_featureController@destroy');
+

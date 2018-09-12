@@ -21,13 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userType = \Auth::user()->user_type;
-        if($userType->user_type == "admin") {
-            return view('admin.index',compact('userType'));
-        } else {
-            return redirect('home');
-        }
-        
+        $users = \App\User::all();
+        return view('admin.users', compact('users'));
     }
 
     /**
@@ -59,7 +54,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.singleUser', compact('user'));
     }
 
     /**
@@ -98,15 +95,4 @@ class UserController extends Controller
         return redirect('/users');
     }
 
-    public function getUsers(){
-        $users = \App\User::all();
-        return view('admin.users', compact('users'));
-    }
-
-    // public function admin(){
-
-    //     // $userId = \Auth::user()->id;
-    //     $userType = \Auth::user()->user_type;
-    //     return view('admin.index',compact('userType'));
-    // }
 }

@@ -47,4 +47,7 @@ class User extends Authenticatable
     public function isAdmin(){
         return ($this->user_type()->get() == 1)?true:false;
     }
+    public function features() {
+        return $this->hasMany(Feature::class);
+    }
 }

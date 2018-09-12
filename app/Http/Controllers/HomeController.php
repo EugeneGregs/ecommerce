@@ -23,6 +23,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // return view('home');
+        $userType = \Auth::user()->user_type;
+
+        if($userType->user_type == "Admin") {
+
+            return view('admin.index',compact('userType'));
+
+        } else if($userType->user_type == "Seller") {
+
+            return view('sellers.index',compact('userType'));
+
+        }  else if($userType->user_type == "Buyer") {
+
+            return view('buyers.index',compact('userType'));
+
+        }
     }
 }
