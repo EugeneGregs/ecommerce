@@ -50,4 +50,7 @@ class User extends Authenticatable
     public function features() {
         return $this->hasMany(Feature::class);
     }
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }
