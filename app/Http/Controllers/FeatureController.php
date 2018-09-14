@@ -16,6 +16,7 @@ class FeatureController extends Controller
     public function index()
     {
        $features = \Auth::user()->features;
+    //    echo( json_encode($features) );
        return view('sellers.features', compact('features'));
     }
 

@@ -55,6 +55,9 @@ Route::delete('/products/{id}','ProductController@destroy');
 
 //product-feature routes
 Route::get('/product_features/{product_id}','Product_featureController@index');
-Route::get('/product_features/create/{product_id}/{feature_id}','Product_featureController@create');
+Route::get('/product_features/create/{product_id}','Product_featureController@create');
+Route::get('/product_features/{product_id}/{feature_id}','Product_featureController@edit');
+Route::post('/product_features','Product_featureController@store');
+Route::patch('/product_features/{feature_id}','Product_featureController@update');
 Route::delete('/product_features/{product_id}/{feature_id}','Product_featureController@destroy');
 

@@ -19,7 +19,16 @@
     </p>
     <p class="text-primary">Product Description: {{ $product->description }}</p>
     <hr>
-    <strong>Features</strong><hr><br><br><br>
+    <strong>Features</strong><br>
+    @foreach( $product->features as $value)
+      @foreach( Auth::user()->features as $feature)
+        @if( $value->parent == $feature->id )
+        {{ $feature->name }}: 
+        @endif
+      @endforeach
+        {{ $value->name }}<br/>
+    @endforeach
+    <hr>
     <form action="/products/{{ $product->id }}" method="POST">
      {{ csrf_field() }}
      {{ method_field('DELETE') }}
