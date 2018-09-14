@@ -27,7 +27,7 @@ class FeatureController extends Controller
      */
     public function create()
     {
-        $features = Feature::all();
+        $features = \Auth::user()->features;
         return view('sellers.createFeature', compact('features'));
     }
 

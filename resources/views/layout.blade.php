@@ -20,14 +20,19 @@
       .container {
         padding-top: 20px;
       }
+
+      body {
+        background-color: #e1e7f2;
+        padding-top: 65px;
+      }
       
     </style>
 
     <title>E-commerce</title>
   </head>
   <body>
-    @include('layouts.navigation')
-    <div class="container">
+    @include('layouts.navnew')
+    <div class="container" style="left: 5%">
     @yield('content')
     @if(count($errors))
     <div class="alert alert-danger">

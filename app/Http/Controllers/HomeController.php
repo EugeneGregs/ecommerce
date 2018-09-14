@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+
+use App\Category;
+
+use App\User;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -36,7 +42,11 @@ class HomeController extends Controller
 
         }  else if($userType->user_type == "Buyer") {
 
-            return view('buyers.index',compact('userType'));
+            $products = Product::latest();
+            $categories = Category::all();
+            $sellers = User::where('user_type_id', 3);
+    
+            return view('buyers.index', compact('products','categories','sellers'));
 
         }
     }
