@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<div class="container">
 <div class="form-group">
     <a href="/categories/create" class="btn btn-success">Add Category</a>
 </div>
@@ -35,4 +36,9 @@
     </tr>
     @endforeach
 </table>
+</div>
 @endsection
+
+@section('pagescript')
+<script src="/js/custom.js"></script>
+@stop

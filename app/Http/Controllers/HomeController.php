@@ -42,11 +42,28 @@ class HomeController extends Controller
 
         }  else if($userType->user_type == "Buyer") {
 
-            $products = Product::latest();
+            $products = Product::where('status', 1)->latest()->get();
             $categories = Category::all();
-            $sellers = User::where('user_type_id', 3);
-    
-            return view('buyers.index', compact('products','categories','sellers'));
+            $sellers = User::where('user_type_id', 3)->get();
+            $orderInCart = \Auth::user()->orders()->where('order_status_id', 1)->first();
+
+            if( $orderInCart ) {
+
+                $orderId = $orderInCart->id;
+                $cartItems = $orderInCart->orderItems;
+
+           } else {
+
+                $orderId = '';
+                $cartItems =[];
+
+           }
+
+           return view('buyers.index', compact('products','categories','sellers','cartItems','orderId'));
+
+        // $testProduct = Product::where('status', 1)->latest()->get()->first();
+
+        //     echo json_encode($testProduct);
 
         }
     }

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="container container-first">
+<div class="container">
   <table class="table table-striped table-hover table-bordered">
     <tr>
       <th>#</th>

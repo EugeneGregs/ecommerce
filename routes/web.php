@@ -61,3 +61,14 @@ Route::post('/product_features','Product_featureController@store');
 Route::patch('/product_features/{feature_id}','Product_featureController@update');
 Route::delete('/product_features/{product_id}/{feature_id}','Product_featureController@destroy');
 
+//buyer routes
+Route::post('/addToCart', 'OrderController@cart');
+Route::post('/addQuantity', 'OrderController@updateQuantity');
+Route::get('/placeOrder/{order_id}', 'OrderController@place');
+Route::get('/clearCart/{order_id}', 'OrderController@clearCart');
+Route::get('/removeFromCart/{product_id}', 'OrderController@removeFromCart');
+
+//seller routes
+Route::get('/orders', 'OrderController@placedOrders');
+Route::get('/completeOrder/{order_id}/{product_id}', 'OrderController@complete');
+
