@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+<div class="container">
 <div class="card">
    <div class="card-body">
       <h5 class="card-title">{{ $product->name }} Features</h5>
@@ -32,5 +33,6 @@
       <a href="/products/{{ $product->id }}" class="card-link btn btn-warning btn-sm">Back</a>
       <a href="/product_features/create/{{ $product->id }}" class="card-link btn btn-warning btn-sm">Add Feature</a>
    </div>
+</div>
 </div>
 @endsection

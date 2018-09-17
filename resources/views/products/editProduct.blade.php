@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-
+<div class="container">
 <form method='POST' action='/products/{{ $product_id }}' enctype="multipart/form-data">
   {{ csrf_field() }}
   {{ method_field('PATCH') }}
@@ -36,5 +36,5 @@
   <button type="submit" class="btn btn-primary">Submit</button>
   
 </form>
-
+</div>
 @endsection

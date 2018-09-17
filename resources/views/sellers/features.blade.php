@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<div class="container">
 <div class="form-group">
     <a href="/features/create" class="btn btn-success">Add Feature</a>
 </div>
@@ -35,4 +36,5 @@
     </tr>
     @endforeach
 </table>
+</div>
 @endsection

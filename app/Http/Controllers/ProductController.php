@@ -53,6 +53,8 @@ class ProductController extends Controller
 
         if( $request->hasFile('image') ) {
 
+            $image = $request->file('image');
+
             //get file Name with Extension
             $fileNameWithExt = $request->file('image')->getClientOriginalName();
 
@@ -65,7 +67,10 @@ class ProductController extends Controller
             //file name to store
             $fileNameToStore = $fileName.'_'.time().'.'.$ext;
 
-            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+            // $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+            $path = public_path('/images');
+            $image->move($path, $fileNameToStore);
+
         } else {
             $fileNameToStore = 'defaultImage.png';
         }

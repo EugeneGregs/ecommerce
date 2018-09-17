@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-
+<div class="container">
 <form method='POST' action='/features/{{ $feature->id }}'>
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
@@ -27,5 +27,5 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     
     </form>
-
+    </div>
 @endsection

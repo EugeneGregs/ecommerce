@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div>
+<div class="container">
   <label>Feature: </label>
   <select name="parent" id="featureName" class="form-control" onchange="showFeatureDiv( '{{ json_encode($features) }}' )">
     <option value="" selected>-- Select Feature Name--</option>

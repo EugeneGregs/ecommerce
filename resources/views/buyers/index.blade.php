@@ -38,11 +38,11 @@
             </ol>
             <div class="carousel-inner" role="listbox" style="width: 100%; height: 350px; !important;">
               <div class="carousel-item active">
-                <img class="d-block img-fluid" src="/storage/images/banner_image.gif" alt="Banner Image" style="width: 100%;">
+                <img class="d-block img-fluid" src="/images/banner_image.gif" alt="Banner Image" style="width: 100%;">
               </div>
               @foreach( $products as $product)
               <div class="carousel-item" style="height: 200px;">
-                <img class="d-block img-fluid" src="/storage/images/{{ $product->image }}" alt="{{ $product->name }} Image" style="width: 100%; height: 350px;">
+                <img class="d-block img-fluid" src="/images/{{ $product->image }}" alt="{{ $product->name }} Image" style="width: 100%; height: 350px;">
                 <div class="carousel-caption d-none d-md-block">
                   <h5 class="text-primary">KES {{ $product->price }} </h5>
                 </div>
@@ -63,7 +63,7 @@
             @foreach( $products as $product )
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="/storage/images/{{ $product->image }}" alt="{{ $product->name }} Image"></a>
+                <a href="#"><img class="card-img-top" src="/images/{{ $product->image }}" alt="{{ $product->name }} Image"></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">{{ $product->name }}</a>

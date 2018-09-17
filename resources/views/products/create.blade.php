@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-
+<div class="container">
 <form method='POST' action='/products' enctype="multipart/form-data">
   {{ csrf_field() }}
   <div class="form-group">
@@ -33,5 +33,5 @@
   <button type="submit" class="btn btn-primary">Submit</button>
   
 </form>
-
+</div>
 @endsection
