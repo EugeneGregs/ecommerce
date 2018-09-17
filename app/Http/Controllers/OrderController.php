@@ -29,6 +29,16 @@ class OrderController extends Controller
         
         if( $request->order_id ) {
 
+            $order = Order::find($request->order_id);
+            $sellers = $order->users()->where('user_id', $request->seller_id)->get();
+
+            if( !count($sellers) ) {
+
+                $sellerN = User::find( $request->seller_id );
+                $sellerN->placedOrders()->attach($request->order_id);
+             
+            }
+
             $orderItem = new Order_item;
             $orderItem->order_id = $request->order_id;
             $orderItem->product_id = $request->product_id;
@@ -87,28 +97,6 @@ class OrderController extends Controller
 
         Order::find($order_id)->update(['order_status_id' => 2]);
         
-    }
-
-    public function placedOrders() {
-
-        $placedOrders = \Auth::user()->placedOrders()->where('order_status_id', 2);
-        $products = \Auth::user()->products;
-        
-        return view('sellers.orders', compact('placedOrders', 'products'));
-    }
-
-    public function complete($order_id, $product_id) {
-
-        // update order status
-        Order::find($order_id)->update(['order_status_id' => 3]);
-
-        // update product status
-        Product::find($product_id)->update(['status' => 2]);
-
-        //send email to buyer
-
-
-
     }
 
     public function updateQuantity(Request $request) {
