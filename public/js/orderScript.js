@@ -74,6 +74,7 @@ function updateCart(itemName, quantity, productId, buyerId, item) {
     }
     var itemId = item.id;
     var itemObj = item;
+    var myjson = JSON.stringify(item);
     var table = document.getElementById("shoppingCart");
     var row = document.createElement("tr");
     total += itemObj.quantity * itemObj.price;
@@ -82,14 +83,14 @@ function updateCart(itemName, quantity, productId, buyerId, item) {
     row.id = "delete" + itemId;
     var quantityButton =
         '<button class="btn btn-primary btn-sm" onclick=\'addQuantity(' +
-        item +
+        myjson +
         "," +
         buyerId +
         ', prompt("Enter Quantity: "))\'>Quantity</button>';
     console.log(quantityButton);
     var removeButton =
         '<button class="btn btn-danger btn-sm" onclick=\'removeCart(' +
-        item +
+        myjson +
         ")'>Remove</button>";
 
     var rowData =
@@ -128,6 +129,7 @@ function addQuantity(item, buyerId, quantity) {
     var formattedTotal = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
     var sendData = "quantity=" + quantity + "&item_id=" + item_id;
 
+    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
@@ -169,6 +171,7 @@ function removeCart(item) {
     var itemId = item.id;
     var itemSubt = +item.price * +item.quantity;
     total -= itemSubt;
+    var xhttp = new XMLHttpRequest();
     var formattedTotal = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
