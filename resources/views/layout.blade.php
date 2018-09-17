@@ -23,7 +23,8 @@
 
       body {
         background-color: #e1e7f2;
-        padding-top: 65px;
+        padding-top: 100px;
+        padding-bottom: 10px;
       }
       
     </style>

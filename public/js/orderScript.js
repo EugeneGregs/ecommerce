@@ -1,10 +1,10 @@
 var item = "";
 var itemId = "";
-var orderId = "";
-var xhttp = new XMLHttpRequest();
+var orderId = 0;
+var placedOrders = [0];
 var total = parseFloat(document.getElementById("total").innerHTML) * 1000 || 0;
 var cashier = document.getElementById("total");
-var baseUrl = "https://ecommerce-eugene.azurewebsites.net";
+var baseUrl = "http://127.0.0.1:8000";
 
 function addToCart(productJson, buyerId, orderIdb) {
     var product = JSON.parse(productJson);
@@ -14,7 +14,9 @@ function addToCart(productJson, buyerId, orderIdb) {
     var product_id = product.id;
     var productId = product.id;
     var quantity = 1;
-    orderId = orderIdb || 0;
+    var order_id = +orderIdb || orderId;
+    orderId = placedOrders.includes(order_id) ? 0 : order_id;
+    alert(orderId);
     var sellerId = product.user_id;
     var sendData =
         "user_id=" +
@@ -24,7 +26,7 @@ function addToCart(productJson, buyerId, orderIdb) {
         "&quantity=" +
         quantity +
         "&order_id=" +
-        orderId +
+        +orderId +
         "&seller_id=" +
         sellerId +
         "&product_price=" +
@@ -34,14 +36,17 @@ function addToCart(productJson, buyerId, orderIdb) {
     // itemObj.order_id = +orderId;
     // itemObj.product_id = +product_id;
     // item = JSON.stringify(itemObj);
-    console.log(item);
-
+    // console.log(item);
+    // console.log(sendData);
+    // debugger;
+    console.log(sendData);
+    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText) {
-                orderId = this.responseText;
+                orderId = JSON.parse(this.responseText).order_id;
             }
-            console.log(this.responseText);
+            // console.log(orderId);
             updateCart(
                 itemName,
                 quantity,
@@ -64,8 +69,11 @@ function addToCart(productJson, buyerId, orderIdb) {
 
 function updateCart(itemName, quantity, productId, buyerId, item) {
     console.log(item);
-    var itemId = JSON.parse(item).id;
-    var itemObj = JSON.parse(item);
+    if (!(item instanceof Object)) {
+        item = JSON.parse(item);
+    }
+    var itemId = item.id;
+    var itemObj = item;
     var table = document.getElementById("shoppingCart");
     var row = document.createElement("tr");
     total += itemObj.quantity * itemObj.price;
@@ -172,4 +180,26 @@ function removeCart(item) {
 
     document.getElementById("delete" + itemId).style.display = "none";
     cashier.innerHTML = formattedTotal;
+}
+
+function clearCart(orderIdb) {
+    orderId = orderId || orderIdb;
+    $("#shoppingCart td").hide();
+    $("#cashier").hide();
+
+    var xhttps = new XMLHttpRequest();
+    xhttps.open("GET", baseUrl + "/clearCart/" + orderId, true);
+    xhttps.send();
+}
+
+function placeOrder(orderIdb) {
+    orderId = orderId || orderIdb;
+    alert(orderId);
+    $("#shoppingCart td").hide();
+    $("#cashier").hide();
+
+    placedOrders.push(+orderId);
+    var xhttps = new XMLHttpRequest();
+    xhttps.open("GET", baseUrl + "/placeOrder/" + orderId, true);
+    xhttps.send();
 }

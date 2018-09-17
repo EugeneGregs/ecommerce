@@ -43,7 +43,7 @@ class OrderController extends Controller
 
         } else {
 
-            //create order number
+            // create order number
             $order_number = 'ORD'.time();
 
             //create new order

@@ -27,7 +27,7 @@
         <!-- /.col-lg-3 -->
         
         <div class="col-lg-6">
-        <div class="shadow bg-white rounded">
+        <div class="shadow bg-white rounded" style="padding: 10px">
           <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" style="background-color: #444"></li>
@@ -124,6 +124,7 @@
                   {{ number_format($total_amount, 2, '.' , ',') }}
                   @endif </span></p>
                   <button class="btn btn-warning btn-sm" onclick="clearCart('{{ $orderId }}')">Clear Cart</button>
+                  <button class="btn btn-primary btn-sm" onclick="placeOrder('{{ $orderId }}')">Place Order</button>
               </div>
             </div>
 
