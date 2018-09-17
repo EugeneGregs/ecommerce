@@ -4,7 +4,7 @@ var orderId = "";
 var xhttp = new XMLHttpRequest();
 var total = parseFloat(document.getElementById("total").innerHTML) * 1000 || 0;
 var cashier = document.getElementById("total");
-var baseUrl = "http://127.0.0.1:8000";
+var baseUrl = "https://ecommerce-eugene.azurewebsites.net";
 
 function addToCart(productJson, buyerId, orderIdb) {
     var product = JSON.parse(productJson);
