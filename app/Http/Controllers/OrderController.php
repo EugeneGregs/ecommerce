@@ -24,6 +24,7 @@ class OrderController extends Controller
             'quantity' => 'required',
             'order_id' => 'required',
             'seller_id' => 'required',
+            'product_price' => 'required',
         ]);
         
         if( $request->order_id ) {
@@ -32,9 +33,13 @@ class OrderController extends Controller
             $orderItem->order_id = $request->order_id;
             $orderItem->product_id = $request->product_id;
             $orderItem->quantity = $request->quantity;
+            $orderItem->price = $request->product_price;
             $orderItem->save();
 
-            echo "Working";
+            $item = Order_item::where('order_id', $request->order_id)
+            ->where('product_id', $request->product_id)->first();
+
+            echo json_encode($item);
 
         } else {
 
@@ -63,10 +68,16 @@ class OrderController extends Controller
             $orderItem->order_id = $order_id;
             $orderItem->product_id = $request->product_id;
             $orderItem->quantity = $request->quantity;
+            $orderItem->price = $request->product_price;
             $orderItem->save();
 
-            //return order id
-            echo $order_id;
+            $item = Order_item::where('order_id', $order_id)
+            ->where('product_id', $request->product_id)->first();
+
+            echo json_encode($item);
+
+            // //return order id
+            // echo $order_id;
 
         }
 
@@ -103,20 +114,25 @@ class OrderController extends Controller
     public function updateQuantity(Request $request) {
 
         $this->validate(request(), [
-            'order_id' => 'required',
-            'product_id' => 'required',
             'quantity' => 'required',
+            'item_id' => 'required',
         ]);
         
-        $order_id = $request->query('order_id');
-        $product_id = $request->query('product_id');
-        $quantity = $request->query('quantity');
-
-       DB::table('order_items')->where([
-            ['order_id', '=' , $order_id],
-            ['product_id', '=' , $product_id],
-        ])->update(['quantity' =>  $quantity]);
+        $quantity = $request->quantity;
+        $item_id = $request->item_id;
+        $item_intId = (int)$item_id;
         
+        $item = Order_item::find( $item_intId );
+        $item->quantity = $quantity;
+        $item->save();
+
+    //    $item = DB::table('order_items')->where([
+    //         ['order_id', '=' , $order_id],
+    //         ['product_id', '=' , $product_id],
+    //     ])->first();
+
+        
+        echo "Saved!!";
     }
 
     public function clearCart($order_id) {
@@ -125,9 +141,9 @@ class OrderController extends Controller
 
     }
 
-    public function removeFromCart($product_id) {
+    public function removeFromCart($id) {
 
-        Order_item::where('product_id', $product_id)->delete();
+        Order_item::where('id', $id)->delete();
 
     }
 }

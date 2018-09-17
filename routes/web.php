@@ -70,5 +70,5 @@ Route::get('/removeFromCart/{product_id}', 'OrderController@removeFromCart');
 
 //seller routes
 Route::get('/orders', 'OrderController@placedOrders');
-Route::get('/completeOrder/{order_id}/{product_id}', 'OrderController@complete');
+Route::get('/completeOrder/{order_id}/{item_id}', 'OrderController@complete');
 

@@ -102,11 +102,11 @@
                     @foreach( $cartItems as $item )
                       @foreach( $products as $product )
                         @if( $item->product_id == $product->id )
-                        <tr>
+                        <tr id="delete{{ $item->id }}">
                           <td>{{ $product->name }}</td>
-                          <td id="quantity">{{ $item->quantity }}</td>
+                          <td id="quantity{{ $item->id }}">{{ $item->quantity }}</td>
                           <td><button class="btn btn-primary btn-sm" onclick="addQuantity('{{ json_encode($item) }}','{{ Auth::user()->id }}', prompt('Enter Quantity: '))">Quantity</button></td>
-                          <td><button class="btn btn-danger btn-sm" onclick="removeCart('{{ $item->product_id }}')">Remove</button></td>
+                          <td><button class="btn btn-danger btn-sm" onclick="removeCart('{{ $item }}')">Remove</button></td>
                         </tr>
                         @endif
                       @endforeach
@@ -116,10 +116,13 @@
             </div>
 
              <br/>
-              <div class="card rounded" style="display: none">
+              <div class="card rounded" style="display: @if( $total_amount ) {{ 'block' }} @else {{ 'none' }}@endif" id="cashier">
                 <div class="card-body">
                     <h6 class="card-title text-success"> Cashier: </h6>
-                  <p class="text-info">Total Amount: KES <span id="total"></span></p>
+                  <p class="text-info">Total Amount: KES <span id="total">
+                  @if( $total_amount )
+                  {{ number_format($total_amount, 2, '.' , ',') }}
+                  @endif </span></p>
                   <button class="btn btn-warning btn-sm" onclick="clearCart('{{ $orderId }}')">Clear Cart</button>
               </div>
             </div>

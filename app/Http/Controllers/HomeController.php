@@ -41,7 +41,7 @@ class HomeController extends Controller
             return view('sellers.index',compact('userType'));
 
         }  else if($userType->user_type == "Buyer") {
-
+            $total_amount = 0;
             $products = Product::where('status', 1)->latest()->get();
             $categories = Category::all();
             $sellers = User::where('user_type_id', 3)->get();
@@ -52,6 +52,14 @@ class HomeController extends Controller
                 $orderId = $orderInCart->id;
                 $cartItems = $orderInCart->orderItems;
 
+                foreach($cartItems as $cartItem) {
+                    foreach( $products as $product ) {
+                         if( $cartItem->product_id == $product->id) {
+                            $total_amount += ( (int)$product->price * (int)$cartItem->quantity );
+                         }
+                    }
+                }
+
            } else {
 
                 $orderId = '';
@@ -59,7 +67,7 @@ class HomeController extends Controller
 
            }
 
-           return view('buyers.index', compact('products','categories','sellers','cartItems','orderId'));
+           return view('buyers.index', compact('products','categories','sellers','cartItems','orderId','total_amount'));
 
         // $testProduct = Product::where('status', 1)->latest()->get()->first();
 
