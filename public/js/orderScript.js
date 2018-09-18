@@ -16,7 +16,7 @@ function addToCart(productJson, buyerId, orderIdb) {
     var quantity = 1;
     var order_id = +orderIdb || orderId;
     orderId = placedOrders.includes(order_id) ? 0 : order_id;
-    alert(orderId);
+    // alert(orderId);
     var sellerId = product.user_id;
     var sendData =
         "user_id=" +
@@ -203,7 +203,7 @@ function clearCart(orderIdb) {
 function placeOrder(orderIdb) {
     orderId = orderId || orderIdb;
     total = 0;
-    alert(orderId);
+    // alert(orderId);
     $("#shoppingCart td").hide();
     $("#cashier").hide();
 
