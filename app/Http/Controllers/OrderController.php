@@ -134,4 +134,16 @@ class OrderController extends Controller
         Order_item::where('id', $id)->delete();
 
     }
+
+    public function ordersHistory() {
+        return view('buyers.orders');
+    }
+
+    public function orderItemsHistory($order_id) {
+
+        $items = Order::find($order_id)->orderItems;
+        $products = Product::all();
+
+        return view('buyers.orderItems', compact('items', 'products'));
+    }
 }

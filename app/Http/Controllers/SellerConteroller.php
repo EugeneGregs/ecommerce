@@ -16,9 +16,6 @@ class SellerConteroller extends Controller
     }
 
     public function placedOrders() {
-
-        // $placedOrders = \Auth::user()->placedOrders()->where('order_status_id', 2)->get();
-        // $products = \Auth::user()->products;
         
         return view('sellers.orders');
     }
@@ -39,5 +36,11 @@ class SellerConteroller extends Controller
 
         return redirect('/orders');
 
+    }
+
+    public function viewSingle($order_id) {
+        $items = Order::find( $order_id )->orderItems;
+
+        return view('sellers.orderItems', compact('items'));
     }
 }

@@ -7,6 +7,8 @@
         <th>#</th>
         <th>Order Number</th>
         <th>Order Status</th>
+        <th>Buyer Name</th>
+        <th>Buyer Email</th>
         <th>Created At</th>
         <th colspan="2">Actions</th>
     </tr>
@@ -24,6 +26,12 @@
            {{ $order->orderStatus->status_type }}
         </td>
         <td>
+          {{ $order->buyer->name }}
+        </td>
+        <td>
+          {{ $order->buyer->email }}
+        </td>
+        <td>
           {{ $order->created_at->toFormattedDateString() }}
         </td>
         @if( count($order->orderUsers()->where('user_id', Auth::user()->id)->where('completed', 0)->get()) )
@@ -31,7 +39,7 @@
           <a href="/completeOrder/{{ $order->id }}" class="btn btn-primary btn-sm">Complete</a>
         </td>
         @endif
-        <td><a href="" class="btn btn-primary btn-sm">View Order</a></td>
+        <td><a href="/viewSingle/{{ $order->id }}" class="btn btn-primary btn-sm">View Order</a></td>
     </tr>
     @endif
     @endforeach

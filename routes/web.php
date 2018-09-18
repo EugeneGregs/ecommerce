@@ -66,9 +66,11 @@ Route::post('/addToCart', 'OrderController@cart');
 Route::post('/addQuantity', 'OrderController@updateQuantity');
 Route::get('/placeOrder/{order_id}', 'OrderController@place');
 Route::get('/clearCart/{order_id}', 'OrderController@clearCart');
+Route::get('/ordersHistory', 'OrderController@ordersHistory');
+Route::get('/orderItemsHistory/{order_id}', 'OrderController@orderItemsHistory');
 Route::get('/removeFromCart/{product_id}', 'OrderController@removeFromCart');
 
 //seller routes
 Route::get('/orders', 'SellerConteroller@placedOrders');
 Route::get('/completeOrder/{order_id}', 'SellerConteroller@complete');
-
+Route::get('/viewSingle/{order_id}', 'SellerConteroller@viewSingle');
